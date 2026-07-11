@@ -12,7 +12,7 @@ export default function Footer() {
           {/* Brand & Copyright */}
           <div className="text-center md:text-left">
             <span className="text-lg font-bold text-primary tracking-tight block mb-2">
-              Esarapu Varun.
+              Esarapu Varun
             </span>
             <p className="text-foreground/60 text-sm">
               &copy; {currentYear} All rights reserved.

@@ -22,7 +22,7 @@ export default function Navbar() {
           {/* Logo / Brand Name */}
           <div className="flex-shrink-0">
             <Link href="/" className="text-xl font-bold tracking-tight text-primary">
-              Esarapu Varun.
+              Esarapu Varun
             </Link>
           </div>
 
