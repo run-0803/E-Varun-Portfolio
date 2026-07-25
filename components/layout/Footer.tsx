@@ -20,7 +20,7 @@ export default function Footer() {
           </div>
 
           {/* Social Links */}
-          <div className="flex items-center space-x-6">
+          <div className="flex justify-center items-center mt-6 text-[#f4f4f0]/60" style={{ gap: '2rem' }}>
             <a
               href="mailto:varunesarapu@gmail.com"
               className="text-foreground/60 hover:text-primary transition-custom"
@@ -43,7 +43,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="https://github.com"
+              href="https://github.com/run-0803"
               target="_blank"
               rel="noopener noreferrer"
               className="text-foreground/60 hover:text-primary transition-custom"

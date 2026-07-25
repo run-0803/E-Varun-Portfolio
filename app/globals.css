@@ -1,46 +1,27 @@
 @import "tailwindcss";
 
-@theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-  --color-surface: var(--surface);
-  --color-border: var(--border);
-}
-
-:root {
-  --background: #ffffff;
-  --foreground: #0f172a;
-  --primary: #2563eb;
-  --surface: #f8fafc;
-  --border: #e2e8f0;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0f172a;
-    --foreground: #f8fafc;
-    --primary: #3b82f6;
-    --surface: #1e293b;
-    --border: #334155;
-  }
+html {
+  scroll-behavior: smooth !important;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  scroll-behavior: smooth;
+  /* Deep Espresso/Charcoal Base */
+  background-color: #0F0C0A;
+  color: #FDFBF7;
+  
+  /* Ambient Antique Gold Glow */
+  background-image: 
+    radial-gradient(circle at 15% 0%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 85% 100%, rgba(201, 166, 107, 0.05) 0%, transparent 50%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Restoring our custom transition for the smooth animations */
-@utility transition-custom {
-  transition-property: all;
-  transition-duration: 300ms;
-  transition-timing-function: ease-in-out;
+a, a:link, a:visited, a:active {
+  color: inherit !important;
+  text-decoration: none !important;
 }
 
-@utility glass-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+section {
+  scroll-margin-top: 100px;
 }

@@ -1,82 +1,44 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
-  const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Experience", href: "#experience" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" }, // <-- Added this line
-  ];
+  // Pure JavaScript scroll - prevents Next.js from "jumping"
+  const handleScroll = (id: string) => {
+    const target = document.getElementById(id);
+    if (target) {
+      const y = target.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
 
   return (
-    <nav className="fixed w-full z-50 bg-background/80 backdrop-blur-md border-b border-border transition-custom">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo / Brand Name */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="text-xl font-bold tracking-tight text-primary">
-              Esarapu Varun
-            </Link>
-          </div>
+    <>
+      <motion.div 
+        className="fixed top-0 left-0 right-0 h-1 bg-[#D4AF37] origin-left z-[100]" 
+        style={{ scaleX }} 
+      />
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-foreground hover:text-primary transition-custom px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-foreground hover:text-primary focus:outline-none p-2"
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+      <motion.nav 
+        initial={{ y: -100 }} animate={{ y: 0 }} transition={{ duration: 0.8 }}
+        className="fixed top-0 left-0 w-full z-50 bg-[#0F0C0A]/90 backdrop-blur-md py-5 border-b border-[#D4AF37]/10 flex justify-center items-center"
+      >
+        <div className="flex font-sans text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-[#B5B0A1] gap-6 md:gap-12">
+          {/* Changed from <a> to <button> to stop the instant jump */}
+          <button onClick={() => handleScroll('intro')} className="hover:text-[#D4AF37] transition-colors">Intro</button>
+          <button onClick={() => handleScroll('experience')} className="hover:text-[#D4AF37] transition-colors">About</button>
+          <button onClick={() => handleScroll('projects')} className="hover:text-[#D4AF37] transition-colors">Works</button>
+          <button onClick={() => handleScroll('certifications')} className="hover:text-[#D4AF37] transition-colors">Certs</button>
+          <button onClick={() => handleScroll('contact')} className="hover:text-[#D4AF37] transition-colors">Say Hello</button>
         </div>
-      </div>
-
-      {/* Mobile Navigation Dropdown */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="md:hidden absolute w-full bg-surface border-b border-border shadow-lg"
-          >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="text-foreground hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-custom"
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
+      </motion.nav>
+    </>
   );
 }
