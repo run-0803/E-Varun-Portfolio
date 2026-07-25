@@ -13,7 +13,7 @@ export const experience = [
   },
   {
     title: "AI Operator Intern",
-    company: "XTRANSMATRIX CONSULTING SERVICES PVT LTD",
+    company: "XTransMatriX Consulting Services Pvt Ltd",
     location: "Bangalore, KA",
     date: "Nov 2025 - Mar 2026",
     description: [

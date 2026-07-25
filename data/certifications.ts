@@ -2,7 +2,7 @@ export const certifications = [
   {
     title: "Architecting SAP on AWS",
     issuer: "AWS Training & Certification",
-    date: "Dec 2024",
+    date: "Nov 2025",
     pdfLink: "/certs/AWS Architect.pdf",
   },
   {
