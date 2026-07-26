@@ -20,22 +20,24 @@ export default function Contact() {
             <h2 className="text-3xl md:text-5xl font-serif text-[#FDFBF7] mb-6 tracking-tight">
               Let's build something.
             </h2>
-            <p className="text-[#B5B0A1] font-sans mb-10 leading-relaxed text-sm md:text-base">
+            <p className="font-sans text-[#B5B0A1] text-base md:text-lg tracking-wide leading-relaxed mb-10">
               Currently open to new opportunities. Whether you have a question regarding my systems architecture, want to discuss an AI role, or just want to connect, my inbox is always open.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              {/* PRIMARY: Ghost Gold to Solid Gold */}
               <a 
                 href="mailto:varunesarapu@gmail.com" 
-                className="w-full sm:w-auto bg-[#D4AF37] text-[#0F0C0A] font-bold tracking-[0.1em] uppercase text-xs px-10 py-5 rounded-md hover:bg-[#C9A66B] transition-all shadow-lg shadow-[#D4AF37]/10"
+                className="w-full sm:w-auto inline-block bg-transparent border border-[#D4AF37]/50 text-[#D4AF37] font-bold tracking-[0.15em] uppercase text-xs px-10 py-5 rounded-md hover:bg-[#D4AF37] hover:text-[#0F0C0A] transition-all duration-300 text-center shadow-[0_0_15px_rgba(212,175,55,0.05)] hover:shadow-[0_0_20px_rgba(212,175,55,0.2)]"
               >
                 Say Hello
               </a>
+              {/* SECONDARY: Dark to Silver/White (No Gold!) */}
               <a 
                 href="https://www.linkedin.com/in/varunesarapu/" 
                 target="_blank" 
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto bg-transparent text-[#FDFBF7] border border-[#2D2723] font-bold tracking-[0.1em] uppercase text-xs px-10 py-5 rounded-md hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all"
+                rel="noopener noreferrer" 
+                className="w-full sm:w-auto inline-block bg-transparent border border-[#2D2723] text-[#B5B0A1] font-bold tracking-[0.15em] uppercase text-xs px-10 py-5 rounded-md hover:border-[#B5B0A1]/50 hover:text-[#FDFBF7] transition-all duration-300 text-center"
               >
                 LinkedIn Profile
               </a>

@@ -13,7 +13,23 @@ export default function Hero() {
 
   return (
     <section id="intro" className="flex flex-col justify-center px-4 sm:px-8 pt-40 pb-20 border-b border-[#D4AF37]/10 min-h-[85vh]">
-      <div className="max-w-4xl mx-auto w-full">
+      
+      {/* Ambient Neural Network Glow (Only ONE block now) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <motion.div 
+          animate={{ x: [0, 30, 0], y: [0, -50, 0], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[20%] left-[10%] w-[40vw] h-[40vw] bg-[#D4AF37]/5 rounded-full blur-[120px]"
+        />
+        <motion.div 
+          animate={{ x: [0, -40, 0], y: [0, 40, 0], opacity: [0.2, 0.4, 0.2] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute bottom-[10%] right-[10%] w-[35vw] h-[35vw] bg-[#C9A66B]/5 rounded-full blur-[100px]"
+        />
+      </div>
+
+      {/* THE FIX: Added 'relative z-10' to keep your text above the glow */}
+      <div className="relative z-10 max-w-4xl mx-auto w-full">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: "easeOut" }}>
           
           <div className="flex items-center mb-6">
@@ -30,24 +46,55 @@ export default function Hero() {
             </span>
           </h1>
           
-          <p className="text-lg md:text-xl text-[#B5B0A1] font-sans max-w-2xl mb-12 leading-relaxed">
+          <p className="font-sans text-[#B5B0A1] text-base md:text-lg tracking-wide leading-relaxed max-w-2xl mb-10">
             Engineering scalable backend systems, intelligent machine learning models, and robust digital architecture.
           </p>
 
-          <div className="flex flex-wrap font-sans text-xs tracking-[0.1em] uppercase font-bold gap-4">
-            <a href="#projects" onClick={(e) => handleScroll(e, 'projects')} 
-              className="bg-[#D4AF37] text-[#0F0C0A] px-8 py-4 rounded-md hover:bg-[#C9A66B] transition-all shadow-lg shadow-[#D4AF37]/10">
+          <div className="flex flex-col sm:flex-row gap-4">
+            {/* PRIMARY: Ghost Gold to Solid Gold */}
+            <a 
+              href="#projects" 
+              onClick={(e) => handleScroll(e, 'projects')}
+              className="inline-block bg-transparent border border-[#D4AF37]/50 text-[#D4AF37] font-bold tracking-[0.15em] uppercase text-xs px-10 py-5 rounded-md hover:bg-[#D4AF37] hover:text-[#0F0C0A] transition-all duration-300 text-center shadow-[0_0_15px_rgba(212,175,55,0.05)] hover:shadow-[0_0_20px_rgba(212,175,55,0.2)]"
+            >
               View Work
             </a>
-            <a href="/Varun_CV.pdf" target="_blank" rel="noopener noreferrer" 
-              className="bg-transparent text-[#D4AF37] border border-[#D4AF37]/30 px-8 py-4 rounded-md hover:bg-[#D4AF37]/10 transition-all">
+            {/* SECONDARY: Dark to Silver/White (No Gold!) */}
+            <a 
+              href="/Varun_CV.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="inline-block bg-transparent border border-[#2D2723] text-[#B5B0A1] font-bold tracking-[0.15em] uppercase text-xs px-10 py-5 rounded-md hover:border-[#B5B0A1]/50 hover:text-[#FDFBF7] transition-all duration-300 text-center"
+            >
               Download CV
             </a>
           </div>
 
-          <div className="mt-16 flex font-sans text-xs tracking-[0.2em] uppercase text-[#B5B0A1] font-bold gap-8">
-            <a href="https://www.linkedin.com/in/varunesarapu/" target="_blank" rel="noopener noreferrer" className="hover:text-[#D4AF37] transition-colors">LinkedIn</a>
-            <a href="https://github.com/run-0803" target="_blank" rel="noopener noreferrer" className="hover:text-[#D4AF37] transition-colors">GitHub</a>
+          {/* Social Icons inside Hero Section */}
+          <div className="mt-16 flex gap-6 items-center text-[#B5B0A1]">
+            <a 
+              href="https://www.linkedin.com/in/varunesarapu/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hover:text-[#D4AF37] hover:-translate-y-1 transition-all duration-300"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect width="4" height="12" x="2" y="9"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+            </a>
+            <a 
+              href="https://github.com/run-0803" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hover:text-[#D4AF37] hover:-translate-y-1 transition-all duration-300"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 8 18v4"/>
+                <path d="O9 18c-4.51 2-5-2-7-2"/>
+              </svg>
+            </a>
           </div>
 
         </motion.div>
