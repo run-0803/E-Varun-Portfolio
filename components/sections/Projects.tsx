@@ -4,15 +4,6 @@ import { motion } from "framer-motion";
 import { projects } from "@/data/projects";
 
 export default function Projects() {
-  const getFallbackTech = (title: string) => {
-    const lower = title.toLowerCase();
-    if (lower.includes("movie")) return ["Python", "Neural Collaborative Filtering", "Pandas", "NumPy"];
-    if (lower.includes("speech")) return ["Python", "CNN", "Librosa", "Raspberry Pi 4", "IoT Dashboard"];
-    if (lower.includes("text emotion")) return ["Python", "TensorFlow", "Keras", "LSTM", "NLP"];
-    if (lower.includes("vehicle")) return ["Python", "Django REST Framework", "MySQL", "REST APIs"];
-    return ["Python", "Machine Learning", "Backend Systems"];
-  };
-
   return (
     <section id="projects" className="py-24 border-b border-[#D4AF37]/10">
       <div className="max-w-4xl mx-auto px-4 sm:px-8">
@@ -22,7 +13,7 @@ export default function Projects() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {projects.map((project, index) => {
               // Now accurately reads your "project.tech" array
-              const techArray = project.tech || project.technologies || project.tags || getFallbackTech(project.title);
+              const techArray = project.tech;
               const isLarge = index === 0 || index === 3; 
 
               return (
