@@ -53,15 +53,18 @@ export default function Navbar() {
     const element = document.getElementById(id);
     
     if (element) {
-      const offset = 30;
+      const offset = 30; // Locked in your preferred offset
       const targetPosition = element.getBoundingClientRect().top + window.scrollY - offset;
 
-      window.history.pushState(null, '', `#${id}`);
-
+      // THE FIX: Run the animation instantly to prevent mobile freeze
       animate(window.scrollY, targetPosition, {
         duration: 0.8,
         ease: [0.16, 1, 0.3, 1],
-        onUpdate: (latest) => window.scrollTo(0, latest)
+        onUpdate: (latest) => window.scrollTo(0, latest),
+        onComplete: () => {
+          // Update the URL silently ONLY AFTER the scroll is finished
+          window.history.pushState(null, '', `#${id}`);
+        }
       });
     }
   };
