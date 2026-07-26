@@ -1,10 +1,13 @@
 "use client";
 
 import { motion, useScroll, useSpring, animate } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Navbar() {
   const [active, setActive] = useState("intro");
+  
+  // THE FIX: A silent reference to track if the user clicked a button
+  const isClickScrolling = useRef(false); 
   
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -21,49 +24,49 @@ export default function Navbar() {
     { name: "Say Hello", id: "contact" }
   ];
 
-  // THE UPGRADE: Intersection Observer for Scroll Spying
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // When a section crosses the middle of the screen, update the pill and URL silently
-          if (entry.isIntersecting) {
+          // THE FIX: Only move the pill if the user is scrolling manually (not via click)
+          if (entry.isIntersecting && !isClickScrolling.current) {
             setActive(entry.target.id);
             window.history.replaceState(null, '', `#${entry.target.id}`);
           }
         });
       },
       { 
-        // Triggers the change when the section is right in the middle of the screen
         rootMargin: "-40% 0px -60% 0px" 
       }
     );
 
-    // Tell the observer to watch all our sections
     navItems.forEach((item) => {
       const element = document.getElementById(item.id);
       if (element) observer.observe(element);
     });
 
     return () => observer.disconnect();
-  }, []); // Run once on mount
+  }, []);
 
   const scrollToSection = (id: string) => {
+    isClickScrolling.current = true; // Lock the observer
     setActive(id);
     const element = document.getElementById(id);
     
     if (element) {
-      const offset = 30; // Locked in your preferred offset
+      const offset = 30; 
       const targetPosition = element.getBoundingClientRect().top + window.scrollY - offset;
 
-      // THE FIX: Run the animation instantly to prevent mobile freeze
       animate(window.scrollY, targetPosition, {
         duration: 0.8,
         ease: [0.16, 1, 0.3, 1],
         onUpdate: (latest) => window.scrollTo(0, latest),
         onComplete: () => {
-          // Update the URL silently ONLY AFTER the scroll is finished
           window.history.pushState(null, '', `#${id}`);
+          // THE FIX: Unlock the observer 50ms after the scroll completely finishes
+          setTimeout(() => {
+            isClickScrolling.current = false;
+          }, 50);
         }
       });
     }
