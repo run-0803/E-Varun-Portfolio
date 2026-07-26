@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Esarapu Varun | AI & Systems Engineer",
-  description: "Portfolio of Esarapu Varun, AI Developer and Systems Engineer.",
+  description: "Portfolio of Esarapu Varun. Engineering scalable backend systems, intelligent machine learning models, and robust digital architecture.",
 };
 
 export default function RootLayout({
