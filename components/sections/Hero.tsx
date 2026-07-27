@@ -1,13 +1,24 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, animate } from "framer-motion";
 
 export default function Hero() {
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-    const target = document.getElementById(id);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const element = document.getElementById(id);
+    
+    if (element) {
+      const offset = 30; // Matches the exact offset from your Navbar
+      const targetPosition = element.getBoundingClientRect().top + window.scrollY - offset;
+
+      animate(window.scrollY, targetPosition, {
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1], // The exact cinematic easing curve
+        onUpdate: (latest) => window.scrollTo(0, latest),
+        onComplete: () => {
+          window.history.pushState(null, '', `#${id}`);
+        }
+      });
     }
   };
 
